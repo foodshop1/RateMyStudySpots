@@ -1,0 +1,74 @@
+{
+  "study_spaces": [
+    {
+      "Building": "Academic Resource Centre",
+      "Room Number": "AC213",
+      "Seating Spaces": "25",
+      "Group/Individual": "Individual",
+      "Type of space": "Quiet Study"
+    },
+    {
+      "Building": "Academic Resource Centre",
+      "Room Number": "AC215",
+      "Seating Spaces": "30",
+      "Group/Individual": "Group",
+      "Type of space": "Collaborative Study"
+    },
+    {
+      "Building": "Highland Hall",
+      "Room Number": "HL001",
+      "Seating Spaces": "50",
+      "Group/Individual": "Both",
+      "Type of space": "Library"
+    },
+    {
+      "Building": "Instructional Centre",
+      "Room Number": "IC200",
+      "Seating Spaces": "40",
+      "Group/Individual": "Group",
+      "Type of space": "Study Room"
+    },
+    {
+      "Building": "Instructional Centre",
+      "Room Number": "IC300",
+      "Seating Spaces": "35",
+      "Group/Individual": "Individual",
+      "Type of space": "Quiet Study"
+    },
+    {
+      "Building": "Student Centre",
+      "Room Number": "SC100",
+      "Seating Spaces": "60",
+      "Group/Individual": "Both",
+      "Type of space": "Common Area"
+    },
+    {
+      "Building": "Student Centre",
+      "Room Number": "SC200",
+      "Seating Spaces": "20",
+      "Group/Individual": "Individual",
+      "Type of space": "Study Pods"
+    },
+    {
+      "Building": "Environmental Science & Chemistry Building",
+      "Room Number": "EV101",
+      "Seating Spaces": "45",
+      "Group/Individual": "Group",
+      "Type of space": "Study Lab"
+    },
+    {
+      "Building": "Environmental Science & Chemistry Building",
+      "Room Number": "EV201",
+      "Seating Spaces": "30",
+      "Group/Individual": "Individual",
+      "Type of space": "Quiet Study"
+    },
+    {
+      "Building": "Science Wing",
+      "Room Number": "SW100",
+      "Seating Spaces": "55",
+      "Group/Individual": "Both",
+      "Type of space": "Study Hall"
+    }
+  ]
+}

@@ -1,5 +1,3 @@
-#TODO: rewrite this in terms of react/next
-
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -38,4 +36,14 @@ class Scrape:
                 }
             data["study_spaces"].append(entry)
 
-        return json.dumps(data, indent=2)
+        # Save the scraped data to JSON file, replacing it each time
+        with open('study-spots-data.json', 'w') as f:
+            json.dump(data, f, indent=2)
+        
+        print(f"Scraped {len(data['study_spaces'])} study spots and saved to study-spots-data.json")
+        
+        return data
+
+# Run the scraper when the script is executed directly
+if __name__ == "__main__":
+    Scrape.data()
