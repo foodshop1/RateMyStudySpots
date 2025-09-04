@@ -29,7 +29,6 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
   // Generate a unique ID for the spot (Building + Room Number)
   const spotId = `${spot.Building}-${spot["Room Number"]}`.replace(/\s+/g, "-").toLowerCase();
 
-  // Get the appropriate icon based on space type
   const getSpaceIcon = (spaceType: string) => {
     switch (spaceType.toLowerCase()) {
       case "library":
@@ -53,21 +52,8 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
     }
   };
 
-  // Get the appropriate color based on group/individual type
-  const getTypeColor = (type: string) => {
-    switch (type.toLowerCase()) {
-      case "individual":
-        return "bg-blue-500";
-      case "group":
-        return "bg-green-500";
-      case "both":
-        return "bg-purple-500";
-      default:
-        return "bg-gray-500";
-    }
-  };
 
-  // Render star rating
+  //  star rating
   const renderStars = (rating: number) => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -87,7 +73,7 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
 
   return (
     <motion.div
-      className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 cursor-pointer overflow-hidden"
+      className="relative bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 cursor-pointer overflow-hidden flex flex-col h-full"
       whileHover={{ 
         scale: 1.02,
         y: -5,
@@ -106,12 +92,16 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.1 }}
       >
-        <div className="text-3xl">{getSpaceIcon(spot["Type of space"])}</div>
+        <div className="text-3xl">
+          {getSpaceIcon(spot["Type of space"])}
+        </div>
         <div>
           <h3 className="text-lg font-semibold text-white">{spot.Building}</h3>
           <p className="text-sm text-gray-300">Room {spot["Room Number"]}</p>
         </div>
       </motion.div>
+
+      
 
       {/* Rating section */}
       <motion.div 
@@ -152,27 +142,17 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
         </div>
       </motion.div>
 
-      {/* Group/Individual badge */}
-      <motion.div 
-        className="mt-4 flex justify-center"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.4 }}
-      >
-        <span className={`px-3 py-1 rounded-full text-xs font-medium text-white ${getTypeColor(spot["Group/Individual"])}`}>
-          {spot["Group/Individual"]}
-        </span>
-      </motion.div>
+      
 
-      {/* More Details Button */}
+      {/* More Details Button - anchored full-width at bottom */}
       <motion.div 
-        className="mt-4 flex justify-center"
+        className="mt-auto -mx-6 -mb-6"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
       >
         <button 
-          className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-lg border border-white/30 transition-all duration-200 hover:scale-105"
+          className="w-full px-6 py-3 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-b-xl border-t border-white/20 transition-colors"
           onClick={(e) => {
             e.stopPropagation();
             router.push(`/study-spot/${spotId}`);
@@ -184,7 +164,7 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
 
       {/* Hover effect overlay */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-blue-600/20 rounded-xl"
+        className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-blue-600/20 rounded-xl pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.3 }}

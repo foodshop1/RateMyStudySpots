@@ -53,15 +53,16 @@ const get_user_review = async (spotId: string, userId: string) => {
 // get all reviews for a specific spot
 const get_spot_reviews = async (spotId: string) => {
     const reviewsCollectionRef = collection(db, "collection", spotId, "reviews");
-    const reviewsSnapshot = await getDocs(reviewsCollectionRef);
-    
-    const reviews: { [userId: string]: Review } = {};
-    reviewsSnapshot.forEach((doc) => {
+    const user_reviews = await getDocs(reviewsCollectionRef);
+  
+    const reviews: { [docId: string]: Review } = {};
+    user_reviews.docs.forEach((doc) => {
         reviews[doc.id] = doc.data() as Review;
     });
-    
     return reviews;
-};
+  };
+
+
 
 // Calculate average rating for a spot
 const average_rating = async (spotId: string) => {
@@ -81,7 +82,7 @@ const average_rating = async (spotId: string) => {
 // Delete a user's review for a spot
 const delete_user_review = async (spotId: string, userId: string) => {
     const userReviewDocRef = doc(db, "collection", spotId, "reviews", userId);
-    // You'll need to import deleteDoc if you want to implement this
+    // TODO: import deleteDoc if you want to implement this
     // await deleteDoc(userReviewDocRef);
 };
 

@@ -12,6 +12,7 @@
     "firebase": "^12.2.1",
     "motion": "^12.23.12",
     "next": "^15.5.2",
+    "node": "^22.19.0",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
@@ -24,6 +25,8 @@
     "eslint": "^9",
     "eslint-config-next": "15.4.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
   }
 }

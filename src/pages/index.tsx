@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { GetServerSideProps } from "next";
 import StudySpotCard from "@/components/card";
 import studySpotsData from "@/study-spots-data.json";
+import {average_rating} from "@/firebase/firebase";
 
 interface StudySpot {
   Building: string;
@@ -8,19 +10,25 @@ interface StudySpot {
   "Seating Spaces": string;
   "Group/Individual": string;
   "Type of space": string;
+  spotId: string;
+  rating: {
+    average: number;
+    totalReviews: number;
+  };
 }
 
-export default function Home() {
-  const [studySpots, setStudySpots] = useState<StudySpot[]>([]);
-  const [filteredSpots, setFilteredSpots] = useState<StudySpot[]>([]);
+interface HomeProps {
+  initialSpots: StudySpot[];
+}
+
+export default function Home({ initialSpots }: HomeProps) {
+  const [studySpots, setStudySpots] = useState<StudySpot[]>(initialSpots);
+  const [filteredSpots, setFilteredSpots] = useState<StudySpot[]>(initialSpots);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("all");
   const [selectedCapacity, setSelectedCapacity] = useState("all");
 
-  useEffect(() => {
-    setStudySpots(studySpotsData.study_spaces);
-    setFilteredSpots(studySpotsData.study_spaces);
-  }, []);
+  // No need for useEffect - data is already loaded via SSR
 
   useEffect(() => {
     let filtered = studySpots;
@@ -67,11 +75,22 @@ export default function Home() {
     return ["all", ...Array.from(new Set(types))];
   };
 
+
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950">
       {/* Header */}
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-12">
+          {/* School Logo */}
+          <div className="mb-8">
+            <img 
+              src="/uoft.png" 
+              alt="University of Toronto Logo" 
+              className="h-48 mx-auto drop-shadow-lg"
+            />
+          </div>
+          
           <h1 className="text-5xl font-bold text-white mb-4">
             Rate My Study Spots
           </h1>
@@ -142,8 +161,8 @@ export default function Home() {
               <StudySpotCard
                 key={`${spot.Building}-${spot["Room Number"]}`}
                 spot={spot}
-                overallRating={4.2 + Math.random() * 0.8} // Mock rating for demo
-                totalReviews={Math.floor(Math.random() * 50) + 5} // Mock review count for demo
+                overallRating={spot.rating.average}
+                totalReviews={spot.rating.totalReviews}
                 onClick={() => handleCardClick(spot)}
               />
             ))}
@@ -159,3 +178,49 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+    // Fetch all study spots with their ratings from Firebase
+    const spotsWithRatings = await Promise.all(
+      studySpotsData.study_spaces.map(async (spot) => {
+        try {
+          const ratingData = await average_rating(spot["Room Number"]);
+          return {
+            ...spot,
+            spotId: spot["Room Number"],
+            rating: ratingData
+          };
+        } catch (error) {
+          console.error(`Error loading rating for spot ${spot["Room Number"]}:`, error);
+          // Return default rating if Firebase call fails
+          return {
+            ...spot,
+            spotId: spot["Room Number"],
+            rating: { average: 0, totalReviews: 0 }
+          };
+        }
+      })
+    );
+
+    return {
+      props: {
+        initialSpots: spotsWithRatings
+      }
+    };
+  } catch (error) {
+    console.error('Error in getServerSideProps:', error);
+    // Fallback to spots without ratings
+    const fallbackSpots = studySpotsData.study_spaces.map(spot => ({
+      ...spot,
+      spotId: spot["Room Number"],
+      rating: { average: 0, totalReviews: 0 }
+    }));
+
+    return {
+      props: {
+        initialSpots: fallbackSpots
+      }
+    };
+  }
+};
