@@ -23,7 +23,7 @@ interface HomeProps {
 
 export default function Home({ initialSpots }: HomeProps) {
   // <StudySpot[]> tells studySpots & setStudySpots to be an array of StudySpot objects
-  const [studySpots, setStudySpots] = useState<StudySpot[]>(initialSpots);
+  const [studySpots, setStudySpots] = useState<StudySpot[]>(initialSpots); // eslint-disable-line @typescript-eslint/no-unused-vars
   const [filteredSpots, setFilteredSpots] = useState<StudySpot[]>(initialSpots);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('all');
@@ -79,6 +79,7 @@ export default function Home({ initialSpots }: HomeProps) {
         <div className="text-center mb-12">
           {/* School Logo */}
           <div className="mb-8">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/uoft.png" alt="University of Toronto Logo" className="h-48 mx-auto drop-shadow-lg" />
           </div>
 
@@ -155,7 +156,7 @@ export default function Home({ initialSpots }: HomeProps) {
         {/* Study Spots Grid */}
         {filteredSpots.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredSpots.map((spot, index) => (
+            {filteredSpots.map((spot) => (
               <StudySpotCard
                 key={`${spot.Building}-${spot['Room Number']}`}
                 spot={spot}

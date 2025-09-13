@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { motion } from 'motion/react';
 import { add_review, get_spot_reviews, average_rating } from '@/firebase/firebase';
 import studySpotsData from '@/study-spots-data.json';
-import StudySpotCard from '@/components/card';
+// import StudySpotCard from '@/components/card'; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 interface StudySpot {
   Building: string;
