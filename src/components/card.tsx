@@ -14,12 +14,10 @@ interface StudySpotCardProps {
   spot: StudySpot;
   overallRating?: number;
   totalReviews?: number;
-  onClick?: () => void;
 }
 
-const StudySpotCard: React.FC<StudySpotCardProps> = ({ spot, overallRating = 0, totalReviews = 0, onClick }) => {
-  // eslint-disable-line @typescript-eslint/no-unused-vars
-  const [isHovered, setIsHovered] = useState(false); // eslint-disable-line @typescript-eslint/no-unused-vars
+const StudySpotCard: React.FC<StudySpotCardProps> = ({ spot, overallRating = 0, totalReviews = 0 }) => {
+  const [isHovered] = useState(false);
   const router = useRouter();
 
   // Generate a unique ID for the spot (Building + Room Number)

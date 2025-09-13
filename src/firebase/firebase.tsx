@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, addDoc, Timestamp, doc, getDoc } from 'firebase/firestore'; // eslint-disable-line @typescript-eslint/no-unused-vars
+import { getFirestore, collection, getDocs, addDoc, Timestamp, doc, getDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,

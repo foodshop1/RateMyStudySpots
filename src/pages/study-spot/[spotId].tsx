@@ -18,6 +18,14 @@ interface StudySpot {
   };
 }
 
+interface RawStudySpot {
+  Building: string;
+  'Room Number': string;
+  'Seating Spaces': string;
+  'Group/Individual': string;
+  'Type of space': string;
+}
+
 interface Review {
   text: string;
   rating: number;
@@ -69,8 +77,7 @@ export default function StudySpotDetail() {
     }
   }, [spotId]);
 
-  const loadSpotData = async (spot: any) => {
-    // eslint-disable-line @typescript-eslint/no-explicit-any
+  const loadSpotData = async (spot: RawStudySpot) => {
     try {
       // Get rating data from Firebase
       const ratingData = await average_rating(spot['Room Number']);
