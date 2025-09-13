@@ -22,7 +22,7 @@ interface Review {
   text: string;
   rating: number;
   author: string;
-  timestamp: any;
+  timestamp: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   tags?: string[];
   amenities?: {
     noiseLevel?: number;
@@ -38,7 +38,7 @@ export default function StudySpotDetail() {
   const [studySpot, setStudySpot] = useState<StudySpot | null>(null);
   const [reviews, setReviews] = useState<{ [key: string]: Review }>({});
   const [loading, setLoading] = useState(true);
-  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false); // eslint-disable-line @typescript-eslint/no-unused-vars
   const [newReview, setNewReview] = useState({
     text: '',
     rating: 5,
@@ -51,8 +51,8 @@ export default function StudySpotDetail() {
       lighting: 3,
     },
   });
-  const [reviewFilter, setReviewFilter] = useState('all');
-  const [reviewSort, setReviewSort] = useState('newest');
+  const [reviewFilter, setReviewFilter] = useState('all'); // eslint-disable-line @typescript-eslint/no-unused-vars
+  const [reviewSort, setReviewSort] = useState('newest'); // eslint-disable-line @typescript-eslint/no-unused-vars
 
   // Find the study spot from the data
   useEffect(() => {
@@ -70,6 +70,7 @@ export default function StudySpotDetail() {
   }, [spotId]);
 
   const loadSpotData = async (spot: any) => {
+    // eslint-disable-line @typescript-eslint/no-explicit-any
     try {
       // Get rating data from Firebase
       const ratingData = await average_rating(spot['Room Number']);
@@ -198,7 +199,7 @@ export default function StudySpotDetail() {
         <div className="text-center">
           <div className="text-6xl mb-4">❌</div>
           <h1 className="text-2xl font-bold text-white mb-2">Study Spot Not Found</h1>
-          <p className="text-blue-200 mb-4">The study spot you're looking for doesn't exist.</p>
+          <p className="text-blue-200 mb-4">The study spot you&apos;re looking for doesn&apos;t exist.</p>
           <button
             onClick={() => router.push('/')}
             className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
@@ -228,11 +229,11 @@ export default function StudySpotDetail() {
     // Filter by rating
     if (reviewFilter !== 'all') {
       const minRating = parseInt(reviewFilter);
-      filtered = filtered.filter(([_, review]) => review.rating >= minRating);
+      filtered = filtered.filter(([, review]) => review.rating >= minRating);
     }
 
     // Sort reviews
-    filtered.sort(([_, a], [__, b]) => {
+    filtered.sort(([, a], [, b]) => {
       switch (reviewSort) {
         case 'newest':
           return (
