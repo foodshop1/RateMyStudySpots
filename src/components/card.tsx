@@ -73,7 +73,7 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
 
   return (
     <motion.div
-      className="relative bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 cursor-pointer overflow-hidden flex flex-col h-full"
+      className="relative bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 cursor-pointer overflow-hidden flex flex-col h-90"
       whileHover={{ 
         scale: 1.02,
         y: -5,
