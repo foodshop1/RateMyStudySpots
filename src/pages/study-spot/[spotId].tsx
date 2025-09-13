@@ -262,6 +262,20 @@ export default function StudySpotDetail() {
     return filtered;
   };
 
+  // Get rating breakdown for the chart
+  const getRatingBreakdown = () => {
+    const breakdown = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+
+    Object.values(reviews).forEach((review) => {
+      const rating = Math.floor(review.rating);
+      if (rating >= 1 && rating <= 5) {
+        breakdown[rating as keyof typeof breakdown]++;
+      }
+    });
+
+    return breakdown;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950">
       {/* Hero Section */}
@@ -437,19 +451,29 @@ export default function StudySpotDetail() {
                   <div className="text-sm text-blue-300">{studySpot.rating.totalReviews} reviews</div>
                 </div>
                 <div className="flex-1 space-y-2">
-                  {[5, 4, 3, 2, 1].map((stars) => (
-                    <div key={stars} className="flex items-center gap-2">
-                      <span className="text-sm w-6 text-white">{stars}</span>
-                      <span className="text-yellow-400">⭐</span>
-                      <div className="flex-1 bg-white/20 rounded-full h-2">
-                        <div
-                          className="bg-yellow-400 h-2 rounded-full transition-all"
-                          style={{ width: `${Math.random() * 80 + 10}%` }}
-                        />
-                      </div>
-                      <span className="text-sm text-blue-300 w-8">{Math.floor(Math.random() * 50 + 10)}</span>
-                    </div>
-                  ))}
+                  {(() => {
+                    const breakdown = getRatingBreakdown();
+                    const totalReviews = Object.values(breakdown).reduce((sum, count) => sum + count, 0);
+
+                    return [5, 4, 3, 2, 1].map((stars) => {
+                      const count = breakdown[stars as keyof typeof breakdown];
+                      const percentage = totalReviews > 0 ? (count / totalReviews) * 100 : 0;
+
+                      return (
+                        <div key={stars} className="flex items-center gap-2">
+                          <span className="text-sm w-6 text-white">{stars}</span>
+                          <span className="text-yellow-400">⭐</span>
+                          <div className="flex-1 bg-white/20 rounded-full h-2">
+                            <div
+                              className="bg-yellow-400 h-2 rounded-full transition-all"
+                              style={{ width: `${percentage}%` }}
+                            />
+                          </div>
+                          <span className="text-sm text-blue-300 w-8">{count}</span>
+                        </div>
+                      );
+                    });
+                  })()}
                 </div>
               </div>
 
