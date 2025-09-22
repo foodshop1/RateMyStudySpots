@@ -1,13 +1,13 @@
-import { motion } from 'motion/react';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { motion } from "motion/react";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 interface StudySpot {
   Building: string;
-  'Room Number': string;
-  'Seating Spaces': string;
-  'Group/Individual': string;
-  'Type of space': string;
+  "Room Number": string;
+  "Seating Spaces": string;
+  "Group/Individual": string;
+  "Type of space": string;
 }
 
 interface StudySpotCardProps {
@@ -16,62 +16,93 @@ interface StudySpotCardProps {
   totalReviews?: number;
 }
 
-const StudySpotCard: React.FC<StudySpotCardProps> = ({ spot, overallRating = 0, totalReviews = 0 }) => {
+const StudySpotCard: React.FC<StudySpotCardProps> = ({
+  spot,
+  overallRating = 0,
+  totalReviews = 0,
+}) => {
   const [isHovered] = useState(false);
   const router = useRouter();
 
   // Generate a unique ID for the spot (Building + Room Number)
-  const spotId = `${spot.Building}-${spot['Room Number']}`.replace(/\s+/g, '-').toLowerCase();
+  const spotId = `${spot.Building}-${spot["Room Number"]}`
+    .replace(/\s+/g, "-")
+    .toLowerCase();
 
   const getSpaceIcon = (spaceType: string) => {
     switch (spaceType.toLowerCase()) {
-      case 'library':
-        return '📚';
-      case 'quiet study':
-        return '🤫';
-      case 'collaborative study':
-        return '👥';
-      case 'study room':
-        return '🏠';
-      case 'study lab':
-        return '🔬';
-      case 'common area':
-        return '🪑';
-      case 'study pods':
-        return '📱';
-      case 'study hall':
-        return '🎓';
+      case "library":
+        return "📚";
+      case "quiet study":
+        return "🤫";
+      case "collaborative study":
+        return "👥";
+      case "study room":
+        return "🏠";
+      case "study lab":
+        return "🔬";
+      case "common area":
+        return "🪑";
+      case "study pods":
+        return "📱";
+      case "study hall":
+        return "🎓";
       default:
-        return '📖';
+        return "📖";
     }
   };
 
   //  star rating
+  const Star = ({ fill = 1 }: { fill: number }) => {
+    return (
+      <span
+        style={{
+          display: "inline-block",
+          position: "relative",
+          width: 20,
+          height: 20,
+        }}
+      >
+        <svg
+          width={20}
+          height={20}
+          viewBox="0 0 20 20"
+          fill="none"
+          style={{ position: "absolute", top: 0, left: 0 }}
+        >
+          <path
+            d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.564-.955L10 0l2.948 5.955 6.564.955-4.756 4.635 1.122 6.545z"
+            fill="#d1d5db" // Tailwind gray-300
+          />
+        </svg>
+        <svg
+          width={20}
+          height={20}
+          viewBox="0 0 20 20"
+          fill="none"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            clipPath: `inset(0 ${100 - fill * 100}% 0 0)`,
+            overflow: "hidden",
+            pointerEvents: "none",
+          }}
+        >
+          <path
+            d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.564-.955L10 0l2.948 5.955 6.564.955-4.756 4.635 1.122 6.545z"
+            fill="#facc15" // Tailwind yellow-400
+          />
+        </svg>
+      </span>
+    );
+  };
   const renderStars = (rating: number) => {
     const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
 
     for (let i = 0; i < 5; i++) {
-      if (i < fullStars) {
-        stars.push(
-          <span key={i} className="text-yellow-400">
-            ⭐
-          </span>
-        );
-      } else if (i === fullStars && hasHalfStar) {
-        stars.push(
-          <span key={i} className="text-yellow-400">
-            ⭐
-          </span>
-        );
-      } else {
-        stars.push(
-          <span key={i} className="text-gray-300">
-            ☆
-          </span>
-        );
-      }
+      let starFill = rating - i;
+      stars.push(<Star key={i} fill={starFill} />);
     }
     return stars;
   };
@@ -94,10 +125,10 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({ spot, overallRating = 0, 
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.1 }}
       >
-        <div className="text-3xl">{getSpaceIcon(spot['Type of space'])}</div>
+        <div className="text-3xl">{getSpaceIcon(spot["Type of space"])}</div>
         <div>
           <h3 className="text-lg font-semibold text-white">{spot.Building}</h3>
-          <p className="text-sm text-gray-300">Room {spot['Room Number']}</p>
+          <p className="text-sm text-gray-300">Room {spot["Room Number"]}</p>
         </div>
       </motion.div>
 
@@ -110,12 +141,14 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({ spot, overallRating = 0, 
       >
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm text-gray-300">Overall Rating</span>
-          <span className="text-sm text-gray-400">({totalReviews} reviews)</span>
+          <span className="text-sm text-gray-400">
+            ({totalReviews} reviews)
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex gap-1">{renderStars(overallRating)}</div>
           <span className="text-lg font-bold text-white ml-2">
-            {overallRating > 0 ? overallRating.toFixed(1) : 'N/A'}
+            {overallRating > 0 ? overallRating.toFixed(1) : "N/A"}
           </span>
         </div>
       </motion.div>
@@ -128,13 +161,19 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({ spot, overallRating = 0, 
         transition={{ delay: 0.3 }}
       >
         <div className="bg-white/5 rounded-lg p-3">
-          <p className="text-xs text-gray-400 uppercase tracking-wide">Capacity</p>
-          <p className="text-white font-medium">{spot['Seating Spaces']} seats</p>
+          <p className="text-xs text-gray-400 uppercase tracking-wide">
+            Capacity
+          </p>
+          <p className="text-white font-medium">
+            {spot["Seating Spaces"]} seats
+          </p>
         </div>
 
         <div className="bg-white/5 rounded-lg p-3">
-          <p className="text-xs text-gray-400 uppercase tracking-wide">Space Type</p>
-          <p className="text-white font-medium">{spot['Type of space']}</p>
+          <p className="text-xs text-gray-400 uppercase tracking-wide">
+            Space Type
+          </p>
+          <p className="text-white font-medium">{spot["Type of space"]}</p>
         </div>
       </motion.div>
 
