@@ -55,7 +55,7 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
 
   return (
     <motion.div
-      className="relative bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 overflow-hidden flex flex-col h-90"
+      className="relative bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 overflow-hidden flex flex-col h-90 cursor-pointer"
       whileHover={{
         scale: 1.02,
         y: -5,
@@ -63,6 +63,15 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
       }}
       whileTap={{ scale: 0.98 }}
       layoutId={spotId}
+      role="button"
+      tabIndex={0}
+      onClick={() => router.push(`/study-spot/${spotId}`)}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          router.push(`/study-spot/${spotId}`);
+        }
+      }}
     >
       {/* Header with icon and building name */}
       <motion.div
@@ -121,24 +130,6 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
           </p>
           <p className="text-white font-medium">{spot["Type of space"]}</p>
         </div>
-      </motion.div>
-
-      {/* More Details Button - anchored full-width at bottom */}
-      <motion.div
-        className="mt-auto -mx-6 -mb-6"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-      >
-        <button
-          className="w-full px-6 py-3 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-b-xl border-t border-white/20 transition-colors cursor-pointer"
-          onClick={(e) => {
-            e.stopPropagation();
-            router.push(`/study-spot/${spotId}`);
-          }}
-        >
-          More Details
-        </button>
       </motion.div>
 
       {/* Hover effect overlay */}

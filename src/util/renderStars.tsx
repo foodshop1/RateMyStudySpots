@@ -46,7 +46,7 @@ const renderStars = (rating: number) => {
   const stars = [];
 
   for (let i = 0; i < 5; i++) {
-    let starFill = Math.max(0, rating - i);
+    const starFill = Math.max(0, rating - i);
     stars.push(<Star key={i} fill={starFill} />);
   }
   return stars;
