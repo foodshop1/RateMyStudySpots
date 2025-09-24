@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { motion } from "motion/react";
-import renderStars from "@/util/renderStars";
+import renderStars from "@/components/renderStars";
 import {
   add_review,
   get_spot_reviews,
@@ -303,7 +303,7 @@ export default function StudySpotDetail() {
         {/* Back Button */}
         <button
           onClick={() => router.push("/")}
-          className="mb-6 flex items-center gap-2 text-blue-200 hover:text-white transition-colors"
+          className="mb-6 flex items-center gap-2 text-blue-200 hover:text-white transition-colors cursor-pointer"
         >
           <span>←</span> Back to Study Spots
         </button>

@@ -1,7 +1,8 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import renderStars from "@/util/renderStars";
+import renderStars from "@/components/renderStars";
+import { style } from "motion/react-client";
 
 interface StudySpot {
   Building: string;
@@ -55,7 +56,11 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
 
   return (
     <motion.div
+<<<<<<< Updated upstream
       className="relative bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 overflow-hidden flex flex-col h-90 cursor-pointer"
+=======
+      className="relative bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 overflow-hidden flex flex-col h-80 cursor-pointer"
+>>>>>>> Stashed changes
       whileHover={{
         scale: 1.02,
         y: -5,
@@ -64,6 +69,7 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
       whileTap={{ scale: 0.98 }}
       layoutId={spotId}
       role="button"
+<<<<<<< Updated upstream
       tabIndex={0}
       onClick={() => router.push(`/study-spot/${spotId}`)}
       onKeyDown={(event) => {
@@ -71,6 +77,11 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
           event.preventDefault();
           router.push(`/study-spot/${spotId}`);
         }
+=======
+      onClick={(e) => {
+        e.stopPropagation();
+        router.push(`/study-spot/${spotId}`);
+>>>>>>> Stashed changes
       }}
     >
       {/* Header with icon and building name */}
@@ -132,6 +143,27 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
         </div>
       </motion.div>
 
+<<<<<<< Updated upstream
+=======
+      {/* More Details Button - anchored full-width at bottom */}
+      <motion.div
+        className="mt-auto -mx-6 -mb-6"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+      >
+        {/* <button
+          className="w-full px-6 py-3 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-b-xl border-t border-white/20 transition-colors cursor-pointer"
+          onClick={(e) => {
+            e.stopPropagation();
+            router.push(`/study-spot/${spotId}`);
+          }}
+        >
+          More Details
+        </button> */}
+      </motion.div>
+
+>>>>>>> Stashed changes
       {/* Hover effect overlay */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-blue-600/20 rounded-xl pointer-events-none"
