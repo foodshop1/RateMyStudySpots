@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { motion } from "motion/react";
-import renderStars from "@/components/renderStars";
+import renderStars from "@/util/renderStars";
 import {
   add_review,
   get_spot_reviews,
