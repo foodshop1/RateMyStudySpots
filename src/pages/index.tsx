@@ -75,6 +75,7 @@ export default function Home({ initialSpots }: HomeProps) {
     return ['all', ...Array.from(new Set(types))];
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const initParticles = async (engine: any) => {
     // load only the stars preset
     await loadStarsPreset(engine);
