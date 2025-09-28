@@ -1,74 +1,263 @@
 {
   "study_spaces": [
     {
-      "Building": "Academic Resource Centre",
-      "Room Number": "AC213",
-      "Seating Spaces": "25",
-      "Group/Individual": "Individual",
-      "Type of space": "Quiet Study"
+      "Building": "Arts and Administration",
+      "Room Number": "AA207",
+      "Seating Spaces": "40",
+      "Group/Individual": "Both",
+      "Type of space": "Study Room"
+    },
+    {
+      "Building": "Arts and Administration",
+      "Room Number": "AA208",
+      "Seating Spaces": "40",
+      "Group/Individual": "Both",
+      "Type of space": "Study Room"
     },
     {
       "Building": "Academic Resource Centre",
-      "Room Number": "AC215",
-      "Seating Spaces": "30",
+      "Room Number": "ARC-2",
+      "Seating Spaces": "28",
+      "Group/Individual": "Individual",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Academic Resource Centre",
+      "Room Number": "ARC-3",
+      "Seating Spaces": "16",
+      "Group/Individual": "Individual",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Academic Resource Centre",
+      "Room Number": "AC332",
+      "Seating Spaces": "25",
+      "Group/Individual": "Both",
+      "Type of space": "Study Room"
+    },
+    {
+      "Building": "Bladen Wing",
+      "Room Number": "Study-Space-(4th Floor)",
+      "Seating Spaces": "12",
+      "Group/Individual": "Individual",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Bladen Wing",
+      "Room Number": "Study-Space-(4th Floor)",
+      "Seating Spaces": "158",
+      "Group/Individual": "Group",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Environmental Science",
+      "Room Number": "Study Room (2nd floor)",
+      "Seating Spaces": "21",
+      "Group/Individual": "Individual",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Highland Hall",
+      "Room Number": "Level-1L",
+      "Seating Spaces": "62",
+      "Group/Individual": "Individual",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Highland Hall",
+      "Room Number": "Level-1U",
+      "Seating Spaces": "63",
+      "Group/Individual": "Individual",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Highland Hall",
+      "Room Number": "Level-1U",
+      "Seating Spaces": "20",
+      "Group/Individual": "Individual",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Humanities Wing",
+      "Room Number": "HW308",
+      "Seating Spaces": "50",
+      "Group/Individual": "Both",
+      "Type of space": "Study Room"
+    },
+    {
+      "Building": "Humanities Wing",
+      "Room Number": "HW402",
+      "Seating Spaces": "36",
+      "Group/Individual": "Both",
+      "Type of space": "Study Room"
+    },
+    {
+      "Building": "Humanities Wing",
+      "Room Number": "Study-Carrels",
+      "Seating Spaces": "68",
+      "Group/Individual": "Individual",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Instructional Centre",
+      "Room Number": "IC200A-Study-Room",
+      "Seating Spaces": "10",
+      "Group/Individual": "Individual",
+      "Type of space": "Common Area"
+    },
+    {
+      "Building": "Instructional Centre",
+      "Room Number": "IC212A-Study-Room",
+      "Seating Spaces": "10",
+      "Group/Individual": "Individual",
+      "Type of space": "Common Area"
+    },
+    {
+      "Building": "Instructional Centre",
+      "Room Number": "IC326",
+      "Seating Spaces": "35",
+      "Group/Individual": "Both",
+      "Type of space": "Study Room"
+    },
+    {
+      "Building": "Library",
+      "Room Number": "Small-Group-Study-Rooms",
+      "Seating Spaces": "24",
       "Group/Individual": "Group",
       "Type of space": "Collaborative Study"
     },
     {
-      "Building": "Highland Hall",
-      "Room Number": "HL001",
-      "Seating Spaces": "50",
-      "Group/Individual": "Both",
-      "Type of space": "Library"
-    },
-    {
-      "Building": "Instructional Centre",
-      "Room Number": "IC200",
-      "Seating Spaces": "40",
+      "Building": "Library",
+      "Room Number": "Large-Group-Study-Rooms",
+      "Seating Spaces": "24",
       "Group/Individual": "Group",
-      "Type of space": "Study Room"
+      "Type of space": "Collaborative Study"
     },
     {
-      "Building": "Instructional Centre",
-      "Room Number": "IC300",
-      "Seating Spaces": "35",
+      "Building": "Library",
+      "Room Number": "Quiet-Study-Room-(AC338)",
+      "Seating Spaces": "71",
       "Group/Individual": "Individual",
-      "Type of space": "Quiet Study"
+      "Type of space": "Individual"
     },
     {
-      "Building": "Student Centre",
-      "Room Number": "SC100",
-      "Seating Spaces": "60",
-      "Group/Individual": "Both",
-      "Type of space": "Common Area"
-    },
-    {
-      "Building": "Student Centre",
-      "Room Number": "SC200",
-      "Seating Spaces": "20",
+      "Building": "Library",
+      "Room Number": "Upper-Level",
+      "Seating Spaces": "217",
       "Group/Individual": "Individual",
-      "Type of space": "Study Pods"
+      "Type of space": "Individual"
     },
     {
-      "Building": "Environmental Science & Chemistry Building",
-      "Room Number": "EV101",
-      "Seating Spaces": "45",
-      "Group/Individual": "Group",
+      "Building": "Library",
+      "Room Number": "Lower-Level",
+      "Seating Spaces": "87",
+      "Group/Individual": "Individual",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Library",
+      "Room Number": "Lower-Level",
+      "Seating Spaces": "3",
+      "Group/Individual": "Individual",
       "Type of space": "Study Lab"
     },
     {
-      "Building": "Environmental Science & Chemistry Building",
-      "Room Number": "EV201",
-      "Seating Spaces": "30",
+      "Building": "Library",
+      "Room Number": "Lower-Level",
+      "Seating Spaces": "78",
       "Group/Individual": "Individual",
-      "Type of space": "Quiet Study"
+      "Type of space": "Study Lab"
+    },
+    {
+      "Building": "Library",
+      "Room Number": "Lower-Level",
+      "Seating Spaces": "55",
+      "Group/Individual": "Individual",
+      "Type of space": "Common Area"
+    },
+    {
+      "Building": "Sam Ibrahim Building",
+      "Room Number": "Study-Space-(1st Floor)",
+      "Seating Spaces": "80",
+      "Group/Individual": "Both",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Sam Ibrahim Building",
+      "Room Number": "Study-Space-(2nd Floor)",
+      "Seating Spaces": "25",
+      "Group/Individual": "Both",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Sam Ibrahim Building",
+      "Room Number": "IA2050",
+      "Seating Spaces": "60",
+      "Group/Individual": "Both",
+      "Type of space": "Study Lab"
+    },
+    {
+      "Building": "Sam Ibrahim Building",
+      "Room Number": "IA2060",
+      "Seating Spaces": "36",
+      "Group/Individual": "Both",
+      "Type of space": "Study Lab"
+    },
+    {
+      "Building": "Sam Ibrahim Building",
+      "Room Number": "IA2110",
+      "Seating Spaces": "24",
+      "Group/Individual": "Both",
+      "Type of space": "Study Room"
+    },
+    {
+      "Building": "Sam Ibrahim Building",
+      "Room Number": "IA2120",
+      "Seating Spaces": "36",
+      "Group/Individual": "Both",
+      "Type of space": "Collaborative Study"
+    },
+    {
+      "Building": "Sam Ibrahim Building",
+      "Room Number": "IA2170",
+      "Seating Spaces": "48",
+      "Group/Individual": "Both",
+      "Type of space": "Study Lab"
+    },
+    {
+      "Building": "Sam Ibrahim Building",
+      "Room Number": "Study-Space-(3rd Floor)",
+      "Seating Spaces": "75",
+      "Group/Individual": "Both",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Sam Ibrahim Building",
+      "Room Number": "Study-Space-(4th Floor)",
+      "Seating Spaces": "10",
+      "Group/Individual": "Individual",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Sam Ibrahim Building",
+      "Room Number": "Study-Space-(5th Floor)",
+      "Seating Spaces": "10",
+      "Group/Individual": "Individual",
+      "Type of space": "Individual"
     },
     {
       "Building": "Science Wing",
-      "Room Number": "SW100",
-      "Seating Spaces": "55",
+      "Room Number": "Corridor",
+      "Seating Spaces": "140",
+      "Group/Individual": "Individual",
+      "Type of space": "Individual"
+    },
+    {
+      "Building": "Social Sciences",
+      "Room Number": "MW264",
+      "Seating Spaces": "30",
       "Group/Individual": "Both",
-      "Type of space": "Study Hall"
+      "Type of space": "Study Room"
     }
   ]
 }
