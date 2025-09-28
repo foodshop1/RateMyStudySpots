@@ -1,7 +1,6 @@
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import { style } from "motion/react-client";
 import renderStars from "@/util/renderStars";
 
 interface StudySpot {
