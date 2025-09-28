@@ -25,7 +25,8 @@ interface HomeProps {
 }
 
 export default function Home({ initialSpots }: HomeProps) {
-  const [studySpots, setStudySpots] = useState<StudySpot[]>(initialSpots);
+  // <StudySpot[]> tells studySpots & setStudySpots to be an array of StudySpot objects
+  const [studySpots, setStudySpots] = useState<StudySpot[]>(initialSpots); // eslint-disable-line @typescript-eslint/no-unused-vars
   const [filteredSpots, setFilteredSpots] = useState<StudySpot[]>(initialSpots);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('all');
@@ -96,6 +97,7 @@ export default function Home({ initialSpots }: HomeProps) {
         <div className="text-center mb-12">
           {/* School Logo */}
           <div className="mb-8">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/uoft.png" alt="University of Toronto Logo" className="h-48 mx-auto drop-shadow-lg" />
           </div>
 
