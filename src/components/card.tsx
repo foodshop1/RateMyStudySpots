@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { style } from "motion/react-client";
 import renderStars from "@/util/renderStars";
@@ -23,7 +23,7 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
   overallRating = 0,
   totalReviews = 0,
 }) => {
-  const [isHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const router = useRouter();
 
   // Generate a unique ID for the spot (Building + Room Number)
@@ -55,13 +55,16 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
   };
 
   return (
+
     <motion.div
-      className="relative bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 overflow-hidden flex flex-col h-90 cursor-pointer"
+      className="relative bg-white backdrop-blur-sm rounded-xl p-6 border border-white/20 overflow-hidden flex flex-col h-80 cursor-pointer"
       whileHover={{
         scale: 1.02,
         y: -5,
         transition: { duration: 0.2 },
       }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
       whileTap={{ scale: 0.98 }}
       layoutId={spotId}
       role="button"
@@ -83,10 +86,13 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
       >
         <div className="text-3xl">{getSpaceIcon(spot["Type of space"])}</div>
         <div>
-          <h3 className="text-lg font-semibold text-white">{spot.Building}</h3>
-          <p className="text-sm text-gray-300">Room {spot["Room Number"]}</p>
+          <h3 className="text-lg font-semibold text-black">{spot.Building}</h3>
+          <p className="text-sm text-gray-400">Room {spot["Room Number"]}</p>
         </div>
       </motion.div>
+      <div className="border-t border-gray-200"></div>
+
+      
 
       {/* Rating section */}
       <motion.div
@@ -96,51 +102,67 @@ const StudySpotCard: React.FC<StudySpotCardProps> = ({
         transition={{ delay: 0.2 }}
       >
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm text-gray-300">Overall Rating</span>
+          <span className="text-sm text-gray-400">Overall Rating</span>
           <span className="text-sm text-gray-400">
             ({totalReviews} reviews)
           </span>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex gap-1">{renderStars(overallRating)}</div>
-          <span className="text-lg font-bold text-white ml-2">
+          <span className="text-lg font-bold text-black ml-2">
             {overallRating > 0 ? overallRating.toFixed(1) : "N/A"}
           </span>
         </div>
       </motion.div>
+      <div className="border-t border-gray-200"></div>
+
 
       {/* Details grid */}
       <motion.div
-        className="grid grid-cols-2 gap-3"
+        className="flex items-stretch divide-x divide-gray-200" // 👈 auto adds vertical line
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
-        <div className="bg-white/5 rounded-lg p-3">
-          <p className="text-xs text-gray-400 uppercase tracking-wide">
-            Capacity
-          </p>
-          <p className="text-white font-medium">
-            {spot["Seating Spaces"]} seats
-          </p>
+        <div className="flex-1 bg-white/5 p-3">
+          <p className="text-xs text-gray-400 uppercase tracking-wide">Capacity</p>
+          <p className="text-black font-medium">{spot["Seating Spaces"]} seats</p>
         </div>
 
-        <div className="bg-white/5 rounded-lg p-3">
-          <p className="text-xs text-gray-400 uppercase tracking-wide">
-            Space Type
-          </p>
-          <p className="text-white font-medium">{spot["Type of space"]}</p>
+        <div className="flex-1 bg-white/5 p-3">
+          <p className="text-xs text-gray-400 uppercase tracking-wide">Space Type</p>
+          <p className="text-black font-medium">{spot["Type of space"]}</p>
         </div>
       </motion.div>
 
-      {/* Hover effect overlay */}
+      {/* Hover effect overlay with blur and button */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-blue-600/20 rounded-xl pointer-events-none"
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-xl pointer-events-none flex items-center justify-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.3 }}
-      />
+      >
+        <motion.button
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg pointer-events-auto cursor-pointer"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ 
+            scale: isHovered ? 1 : 0.8, 
+            opacity: isHovered ? 1 : 0 
+          }}
+          transition={{ duration: 0.2, delay: 0.1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={(e) => {
+            e.stopPropagation();
+            router.push(`/study-spot/${spotId}`);
+          }}
+        >
+          Click for more info
+        </motion.button>
+      </motion.div>
+      
     </motion.div>
+    
   );
 };
 

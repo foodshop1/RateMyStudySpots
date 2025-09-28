@@ -3,6 +3,9 @@ import { GetServerSideProps } from 'next';
 import StudySpotCard from '@/components/card';
 import studySpotsData from '@/study-spots-data.json';
 import { average_rating } from '@/firebase/firebase';
+import Particles from "react-tsparticles";
+import { loadStarsPreset } from "tsparticles-preset-stars";
+
 
 interface StudySpot {
   Building: string;
@@ -72,8 +75,23 @@ export default function Home({ initialSpots }: HomeProps) {
     return ['all', ...Array.from(new Set(types))];
   };
 
+  const initParticles = async (engine: any) => {
+    // load only the stars preset
+    await loadStarsPreset(engine);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950">
+    <div className="relative min-h-screen bg-gradient-to-br from-blue-500 via-blue-800 to-blue-850">
+      {/* ⭐ Stars background */}
+      <Particles
+        id="stars-bg"
+        init={initParticles}
+        options={{
+          preset: "stars",
+          background: { color: "transparent" }, // let your gradient show
+        }}
+        className="absolute inset-0  pointer-events-none"
+      />
       {/* Header */}
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-12">
