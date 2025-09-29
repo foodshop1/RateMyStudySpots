@@ -84,7 +84,7 @@ export default function Home({ initialSpots }: HomeProps) {
 
   return (
     
-    <div className="relative min-h-screen bg-gradient-to-br from-blue-750 via-blue-800 to-blue-1000">
+    <div className="relative min-h-screen bg-gradient-to-br from-blue-950 via-blue-700 to-blue-950">
       {/* ⭐ Stars background */}
       <Particles
         id="stars-bg"
@@ -113,7 +113,7 @@ export default function Home({ initialSpots }: HomeProps) {
 
         {/* Tabs */}
         <Tabs defaultValue="study-spots" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-white/10 backdrop-blur-sm border border-white/20">
+          <TabsList className="grid w-full grid-cols-2 bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
             <TabsTrigger 
               value="study-spots" 
               className="data-[state=active]:bg-blue-600 data-[state=active]:text-white text-blue-200 hover:text-white transition-all duration-200"
