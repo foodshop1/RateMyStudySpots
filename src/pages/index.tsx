@@ -5,6 +5,7 @@ import studySpotsData from '@/study-spots-data.json';
 import { average_rating } from '@/firebase/firebase';
 import Particles from "react-tsparticles";
 import { loadStarsPreset } from "tsparticles-preset-stars";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 
 interface StudySpot {
@@ -82,7 +83,8 @@ export default function Home({ initialSpots }: HomeProps) {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-blue-500 via-blue-800 to-blue-850">
+    
+    <div className="relative min-h-screen bg-gradient-to-br from-blue-750 via-blue-800 to-blue-1000">
       {/* ⭐ Stars background */}
       <Particles
         id="stars-bg"
@@ -109,88 +111,117 @@ export default function Home({ initialSpots }: HomeProps) {
           </p>
         </div>
 
-        {/* Search and Filters */}
-        <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 mb-8 border border-blue-200/30 shadow-lg">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {/* Search */}
-            <div className="md:col-span-2">
-              <label className="block text-white text-sm font-semibold mb-2">Search Study Spots</label>
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search by building, room, or space type..."
-                className="w-full px-4 py-2 bg-white/30 border border-blue-200/50 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-300"
-              />
+        {/* Tabs */}
+        <Tabs defaultValue="study-spots" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 bg-white/10 backdrop-blur-sm border border-white/20">
+            <TabsTrigger 
+              value="study-spots" 
+              className="data-[state=active]:bg-blue-600 data-[state=active]:text-white text-blue-200 hover:text-white transition-all duration-200"
+            >
+              Dedicated Study Spots
+            </TabsTrigger>
+            <TabsTrigger 
+              value="classroom-availability"
+              className="data-[state=active]:bg-blue-600 data-[state=active]:text-white text-blue-200 hover:text-white transition-all duration-200"
+            >
+              Classroom Availability
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="study-spots" className="mt-0">
+            {/* Search and Filters */}
+            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 mb-8 border border-blue-200/30 shadow-lg">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {/* Search */}
+                <div className="md:col-span-2">
+                  <label className="block text-white text-sm font-semibold mb-2">Search Study Spots</label>
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search by building, room, or space type..."
+                    className="w-full px-4 py-2 bg-white/30 border border-blue-200/50 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-300"
+                  />
+                </div>
+
+                {/* Space Type Filter */}
+                <div>
+                  <label className="block text-white text-sm font-semibold mb-2">Space Type</label>
+                  <select
+                    value={selectedType}
+                    onChange={(e) => setSelectedType(e.target.value)}
+                    className="w-full px-4 py-2 bg-white/30 border border-blue-200/50 rounded-lg text-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-300"
+                  >
+                    {getUniqueSpaceTypes().map((type) => (
+                      <option key={type} value={type} className="bg-blue-800 text-white/50">
+                        {type === 'all' ? 'All Types' : type}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Capacity Filter */}
+                <div>
+                  <label className="block text-white text-sm font-semibold mb-2">Capacity</label>
+                  <select
+                    value={selectedCapacity}
+                    onChange={(e) => setSelectedCapacity(e.target.value)}
+                    className="w-full px-4 py-2 bg-white/30 border border-blue-200/50 rounded-lg text-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-300"
+                  >
+                    <option value="all" className="bg-blue-800 text-white/50">
+                      All Sizes
+                    </option>
+                    <option value="small" className="bg-blue-800 text-white/50">
+                      Small (≤20 seats)
+                    </option>
+                    <option value="medium" className="bg-blue-800 text-white/50">
+                      Medium (21-40 seats)
+                    </option>
+                    <option value="large" className="bg-blue-800 text-white/50">
+                      Large (&gt;40 seats)
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
 
-            {/* Space Type Filter */}
-            <div>
-              <label className="block text-white text-sm font-semibold mb-2">Space Type</label>
-              <select
-                value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value)}
-                className="w-full px-4 py-2 bg-white/30 border border-blue-200/50 rounded-lg text-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-300"
-              >
-                {getUniqueSpaceTypes().map((type) => (
-                  <option key={type} value={type} className="bg-blue-800 text-white/50">
-                    {type === 'all' ? 'All Types' : type}
-                  </option>
+            {/* Results Count */}
+            <div className="mb-6">
+              <p className="text-blue-100 text-lg font-medium">
+                Showing {filteredSpots.length} of {studySpots.length} study spots
+              </p>
+            </div>
+
+            {/* Study Spots Grid */}
+            {filteredSpots.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {filteredSpots.map((spot) => (
+                  <StudySpotCard
+                    key={`${spot.Building}-${spot['Room Number']}`}
+                    spot={spot}
+                    overallRating={spot.rating.average}
+                    totalReviews={spot.rating.totalReviews}
+                  />
                 ))}
-              </select>
+              </div>
+            ) : (
+              <div className="text-center py-16">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3 className="text-2xl font-semibold text-white mb-2">No study spots found</h3>
+                <p className="text-blue-200">Try adjusting your search criteria or filters</p>
+              </div>
+            )}
+          </TabsContent>
+
+          <TabsContent value="classroom-availability" className="mt-0">
+            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 mb-8 border border-blue-200/30 shadow-lg">
+              <h2 className="text-2xl font-bold text-white mb-4">Classroom Availability</h2>
+              <p className="text-blue-100 text-lg">
+                This feature is coming soon! Check back later for real-time classroom availability and schedules.
+              </p>
             </div>
-
-            {/* Capacity Filter */}
-            <div>
-              <label className="block text-white text-sm font-semibold mb-2">Capacity</label>
-              <select
-                value={selectedCapacity}
-                onChange={(e) => setSelectedCapacity(e.target.value)}
-                className="w-full px-4 py-2 bg-white/30 border border-blue-200/50 rounded-lg text-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-300"
-              >
-                <option value="all" className="bg-blue-800 text-white/50">
-                  All Sizes
-                </option>
-                <option value="small" className="bg-blue-800 text-white/50">
-                  Small (≤20 seats)
-                </option>
-                <option value="medium" className="bg-blue-800 text-white/50">
-                  Medium (21-40 seats)
-                </option>
-                <option value="large" className="bg-blue-800 text-white/50">
-                  Large (&gt;40 seats)
-                </option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        {/* Results Count */}
-        <div className="mb-6">
-          <p className="text-blue-100 text-lg font-medium">
-            Showing {filteredSpots.length} of {studySpots.length} study spots
-          </p>
-        </div>
-
-        {/* Study Spots Grid */}
-        {filteredSpots.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredSpots.map((spot) => (
-              <StudySpotCard
-                key={`${spot.Building}-${spot['Room Number']}`}
-                spot={spot}
-                overallRating={spot.rating.average}
-                totalReviews={spot.rating.totalReviews}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-16">
-            <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-2xl font-semibold text-white mb-2">No study spots found</h3>
-            <p className="text-blue-200">Try adjusting your search criteria or filters</p>
-          </div>
-        )}
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
