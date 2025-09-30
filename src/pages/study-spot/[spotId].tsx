@@ -8,7 +8,10 @@ import {
   average_rating,
 } from "@/firebase/firebase";
 import studySpotsData from "@/study-spots-data.json";
+import { average } from "firebase/firestore";
+import SimilarSpotRating from "@/components/SimilarSpotRating";
 // import StudySpotCard from '@/components/card'; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 
 interface StudySpot {
   Building: string;
@@ -704,12 +707,7 @@ export default function StudySpotDetail() {
                         <p className="text-xs text-blue-200">
                           Room {spot["Room Number"]}
                         </p>
-                        <div className="flex items-center gap-1 mt-1">
-                          <div className="flex gap-1">{renderStars(4.3)}</div>
-                          <span className="text-xs text-blue-300 ml-1">
-                            (189)
-                          </span>
-                        </div>
+                        <SimilarSpotRating roomNumber={spot["Room Number"]} />
                       </div>
                     </div>
                   ))}
